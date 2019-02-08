@@ -1,0 +1,24 @@
+<!--textarea rows="6" [value]="newPost" #postInput></textarea-->
+<!--using [] will make it typescript property instead of pure html property
+this case: [value]="Test" it looks for property named Test, since we don't have Test defined in component.ts
+it will show as undefined.
+using # give textarea reference name called postInput
+### we achieve setting by [value]
+### we achieve reading by #postInput
+-->
+<mat-card>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Title" [(ngModel)]="enteredTitle">
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput rows="6" placeholder="Content" [(ngModel)]="enteredContent"></textarea>
+    <!--textarea matInput rows="6" placeholder="Content" [(ngModel)]="enteredContent" (ngModelChange)="onChange()"></textarea-->
+  </mat-form-field>
+  <!--we can do all above in the beautiful angular two way binding in just one step
+  with ngModel, two way binding
+  -->
+<button mat-raised-button color="primary" (click)="onAddPost()">Save Post</button>
+</mat-card>
+
+<p>{{ newPost }}</p>

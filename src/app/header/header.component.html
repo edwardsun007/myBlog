@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+    <span style="font-family: 'Lato', sans-serif; font-size: 2em;">My Blog</span>
+
+    <span class="example-fill-remaining-space"></span>
+
+    <span><a routerLink="/">Home</a></span>
+
+    <span *ngIf="userIsAuthenticated"><a routerLink="/create" routerLinkActive="active-link">Create Post</a></span>
+    <span *ngIf="!userIsAuthenticated"><a routerLink="/login" routerLinkActive="active-link">Log In</a></span>
+    <span *ngIf="!userIsAuthenticated"><a routerLink="/signup" routerLinkActive="active-link">Sign Up</a></span>
+    <span *ngIf="userIsAuthenticated"><button (click)="onLogout()" mat-button color="warn" mat-raised-button style="font-size: 1.2rem;">Logout</button></span>
+</mat-toolbar>

@@ -1,0 +1,63 @@
+<div class="card-wrapper">
+  <mat-card>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form [formGroup]="form" (submit)="onSavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading">
+    <!--create directive formGroup with the name of instance we created in ts file
+    in the input tag below, we removed name, instead we use formControlName
+    -->
+      <mat-card-title>{{mode}} your post here:</mat-card-title>
+      <mat-form-field floatLabel="never"> <!-- remove the float label-->
+          <input
+            matInput
+            type="text"
+            formControlName="title"
+            placeholder="Title"
+            style="font-family: 'Merriweather', sans-serif; font-weight:700; font-size: 1.2em;">
+          <mat-error *ngIf="form.get('title').invalid">
+              <mat-error *ngIf="form.get('title').errors.required">
+                Title is required!
+              </mat-error>
+              <mat-error *ngIf="form.get('title').errors.minlength">
+                Title needs at least 4 characters !
+              </mat-error>
+          </mat-error>
+      </mat-form-field>
+      <mat-form-field floatLabel="never">
+          <textarea
+            matInput
+            rows="6"
+            formControlName="content"
+            placeholder="Content"
+            style="font-family: 'Charm', cursive; font-size:1.5em;">
+          </textarea>
+          <mat-error *ngIf="form.get('content').invalid">
+            <div *ngIf="form.get('content').errors.required">
+                Cannot be empty!
+            </div>
+          </mat-error>
+      </mat-form-field>
+      <div class="img-loader">
+        <button (click)="filePicker.click()" mat-stroked-button type="button" color="primary">Upload Image</button>
+        <input type="file" #filePicker (change)="onImagePicked($event)"> <!--localRef is filePicker-->
+      </div>
+      <div class="image-preview" *ngIf="imagePreview!=='' && imagePreview && form.get('image').valid">
+        <img [src]="imagePreview" [alt]="form.value.title">
+      </div>
+
+      <div *ngIf="form.get('image').invalid" style="margin-bottom:20px;">
+        <mat-error *ngIf="imagePreview && form.get('image').errors.invalidMimeType">
+          Only files of [jpg, jpeg, png] are allowed to upload!
+        </mat-error>
+      </div>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="postForm.invalid">Save Post</button>
+      <!--I really prefer disable the submit button when its still invalid input!-->
+
+    </form>
+  </mat-card>
+</div>
+

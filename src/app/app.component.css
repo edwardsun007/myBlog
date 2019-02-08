@@ -1,0 +1,21 @@
+.app-wrapper {
+  /* margin-top: 50px; */
+  /* width:80%;
+  height:80%; */
+  /* margin:auto; */
+  background: url(/assets/images/main-bg.jpeg) repeat-y center center;
+    -webkit-background-attachment: fixed;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 800%;  /*in case you see white edge when post opened up*/
+    width: 100%;
+}
+
+/* body{
+  background: url(/assets/images/main-bg.jpeg) no-repeat center center;
+    -webkit-background-attachment: fixed;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+    height: 300px;
+} */

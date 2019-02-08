@@ -1,0 +1,50 @@
+<div class="login_wrapper">
+  <mat-card>
+    <mat-card-title>Log-in To Your Account:</mat-card-title>
+    <form class="login-form" (submit)="onlogin(loginForm)" #loginForm="ngForm">
+    <!--create directive formGroup with the name of instance we created in ts file
+    in the input tag below, we removed name, instead we use formControlName
+    -->
+      <mat-form-field floatLabel="never"> <!-- remove the float label-->
+          <input
+            matInput
+            name="email"
+            ngModel
+            type="email"
+            placeholder="Email Address"
+            required
+            #email="ngModel">
+          <mat-error *ngIf="email.invalid">
+              <mat-error *ngIf="email?.errors.required">
+                Email is required!
+              </mat-error>
+              <mat-error *ngIf="email?.errors.email">
+                Not Valid Email Address!
+              </mat-error>
+          </mat-error>
+      </mat-form-field>
+      <mat-form-field floatLabel="never">
+          <input
+            matInput
+            type="password"
+            placeholder="Password"
+            required
+            name="password"
+            ngModel
+            #password="ngModel">
+          <mat-error *ngIf="password.invalid">
+            <div *ngIf="password?.errors.required">
+                Password cannot be empty!
+            </div>
+          </mat-error>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="loginForm.invalid" *ngIf="!isLoading">Login</button> <!-- hide login button if its loading -->
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <!--I really prefer disable the submit button when its still invalid input!-->
+    </form>
+    </mat-card>
+</div>

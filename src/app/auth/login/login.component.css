@@ -1,0 +1,26 @@
+.login_wrapper{
+  padding-top: 20px!important;
+}
+
+mat-card {
+  width: 50%;
+  margin:auto;
+}
+
+.login-form > mat-form-field{
+  display: block;
+  width: 60%;
+  margin-left:20%;
+  margin-bottom: 10px;
+}
+
+.login-form > button {
+  display: block;
+  width: 40%;
+  margin:auto;
+}
+
+.login-form > mat-spinner {
+  display: block;
+  margin:auto;
+}

@@ -1,0 +1,113 @@
+.list_wrapper{
+  /* margin-top: 100px; 16px = 1rem */
+  width: 47%;
+  padding-top:25px;
+  margin: auto;
+}
+
+mat-spinner{
+  width: 50%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+mat-expansion-panel{
+  margin-bottom: 10px;
+}
+
+/* .mat-paginator > .mat-paginator-outer-container > .mat-paginator-container > .mat-paginator-page-size >  */
+mat-paginator{
+  background-color: #9037df87;
+  color: white;
+  font-family: 'Questrial', sans-serif;
+  font-size:1em;
+}
+
+
+/* mat-select-value > mat-select-value-text{
+  color: red!important;
+} */
+
+/* mat-select #mat-select-0{
+  color: red!important;
+} */
+
+mat-paginator > mat-paginator-outer-container > mat-paginator-page-size > mat-paginator-page-size-select >
+mat-form-field-wrapper > mat-form-field-infix > mat-select > mat-select-trigger > mat-select-value > mat-select-value-text > span{
+  color: red!important;
+}
+/*
+mat-select-value-text {
+  color: red!important;
+} */
+
+/* .mat-paginator > .mat-paginator-outer-container > .mat-paginator-container > .mat-paginator-page-size > .mat-paginator-page-size-select > .mat-form-field-wrapper > .mat-form-field-infix > .mat-select > .mat-select-trigger > .mat-select-value > .ng-tns-c11-5 {
+  color: red!important;
+} */
+
+.post-image{
+  width: 90%;
+  margin: auto;
+}
+
+.post-image > img{
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  width: 600px;
+  margin: auto;
+}
+/* mat-accordion mat-expansion-panel{
+  background-color: green;
+} */
+
+/*change panel font I write it in html instead of css
+css here gets ignored*/
+/* mat-expansion-panel mat-expansion-panel-header .mat-content .mat-expansion-panel-header .mat-expansion-panel{
+  font-family: 'Montserrat', sans-serif!important;
+  color:red;
+} */
+
+.info-txt{
+  text-align: center;
+}
+
+mat-action-row > button {
+  margin-right: 10px;
+}
+
+
+@media only screen and (max-width:480px){
+  .post-image > img{
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media only screen and (max-width:620px){
+  .post-image > img{
+    width: 200px;
+    height: 200px;
+  }
+}
+
+
+/* @media only screen and (max-width:800px){
+  .post-image > img{
+    width: 77%;
+    height: 100px;
+  }
+} */
+
+
+@media only screen and (max-width:970px){
+  .post-image > img{
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media only screen and (max-width:1260px){
+  .post-image > img{
+    width: 300px;
+  }
+}

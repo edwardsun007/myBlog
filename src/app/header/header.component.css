@@ -1,0 +1,28 @@
+mat-toolbar{
+  height: 100px;
+}
+
+/* trick to make specified element occupy the remaining space */
+.example-fill-remaining-space{
+  flex: 1 1 auto;
+}
+
+a {
+  text-decoration: None;
+  color:white;
+  font-family: 'Arvo', serif;
+}
+
+.active-link{
+  color:orange;
+}
+
+span{
+  /* cursor: pointer; */
+  margin-left: 2%;
+}
+
+.Sign-Up {
+  margin-right:2%;
+}
+

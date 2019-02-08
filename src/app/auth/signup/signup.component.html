@@ -1,0 +1,80 @@
+<div class="signUp_wrapper">
+  <mat-card>
+    <mat-card-title>Register New Account:</mat-card-title>
+    <form class="signUp-form" (submit)="onSignUp(signUpForm)" #signUpForm="ngForm">
+    <!--create directive formGroup with the name of instance we created in ts file
+    in the input tag below, we removed name, instead we use formControlName
+    -->
+      <mat-form-field floatLabel="never"> <!-- remove the float label-->
+          <input
+            matInput
+            name="firstname"
+            ngModel
+            type="text"
+            placeholder="First Name"
+            required
+            #firstname="ngModel">
+          <mat-error *ngIf="firstname.invalid">
+              <mat-error *ngIf="firstname?.errors.required">
+                First Name is required!
+              </mat-error>
+          </mat-error>
+      </mat-form-field>
+      <mat-form-field floatLabel="never"> <!-- remove the float label-->
+          <input
+            matInput
+            name="lastname"
+            ngModel
+            type="text"
+            placeholder="Last Name"
+            required
+            #lastname="ngModel">
+          <mat-error *ngIf="lastname.invalid">
+              <mat-error *ngIf="lastname?.errors.required">
+                Last Name is required!
+              </mat-error>
+          </mat-error>
+      </mat-form-field>
+      <mat-form-field floatLabel="never"> <!-- remove the float label-->
+          <input
+            matInput
+            name="email"
+            ngModel
+            type="email"
+            placeholder="Email Address"
+            required
+            #email="ngModel">
+          <mat-error *ngIf="email.invalid">
+              <mat-error *ngIf="email?.errors.required">
+                Email is required!
+              </mat-error>
+              <mat-error *ngIf="email?.errors.email">
+                Not Valid Email Address!
+              </mat-error>
+          </mat-error>
+      </mat-form-field>
+      <mat-form-field floatLabel="never">
+          <input
+            matInput
+            name="password"
+            ngModel
+            type="password"
+            placeholder="Password"
+            required
+            #password="ngModel">
+          <mat-error *ngIf="password.invalid">
+            <div *ngIf="password?.errors.required">
+                Password cannot be empty!
+            </div>
+          </mat-error>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="signUpForm.invalid" *ngIf="!isLoading">Signup</button> <!-- hide login button if its loading -->
+      <!--I really prefer disable the submit button when its still invalid input!-->
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+    </form>
+    </mat-card>
+</div>

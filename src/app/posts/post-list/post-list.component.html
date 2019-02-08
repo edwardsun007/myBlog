@@ -1,0 +1,22 @@
+<div class="list_wrapper">
+  <mat-spinner *ngIf="isLoading" style="margin-top:50px;"></mat-spinner>
+  <mat-accordion multi="true" *ngIf="posts.length > 0 && !isLoading">
+    <mat-expansion-panel *ngFor="let post of posts">
+      <mat-expansion-panel-header style="font-family: 'Merriweather', sans-serif; font-weight:700; font-size: 1.2em;">
+      {{ post.title }}
+      </mat-expansion-panel-header>
+      <div class="post-image">
+        <img [src]="post.imagePath" [alt]="post.title">
+      </div>
+      <p style="font-family: 'Charm', cursive; font-size:1.5em;">{{ post.content }}<p>
+      <mat-action-row *ngIf="userIsAuthenticated && userId === post.creator">
+        <a [routerLink]="['/edit', post.id]" color="primary" mat-raised-button style="margin-right:10px;">EDIT</a>
+        <!--Edit became link now, point to edit link however, which also use postCreateForm compo-->
+        <button color="warn" (click)="onDelete(post.id)" mat-raised-button>DELETE</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-paginator *ngIf="posts.length > 0" [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangePage($event)"></mat-paginator>
+  <!-- page Event -->
+  <p class="info-txt mat-body-1" *ngIf="posts.length<=0 && !isLoading" style="font-family:'Titillium Web', sans-serif; font-weight:700; font-size: 1.5em; color: #0E0B16; margin-top: 50px;">Create Your Very First Post <i class="far fa-smile" style="font-size:60px; color:orange; vertical-align: middle;"></i></p>
+</div>

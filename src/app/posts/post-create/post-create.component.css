@@ -1,0 +1,10 @@
+/* mat-card{
+  width:80%;
+  height:80%;
+  margin:auto;
+  background-color: lightblue;
+} */
+
+mat-form-field,textarea{
+  width: 100%;
+}
