@@ -1,18 +1,16 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { PostService } from '../posts.service';
-import { AuthService } from '../../auth/auth.service';
-import { Post } from '../post.model';
-import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
-import { PageEvent } from '@angular/material';
-
+import { Component, Input, OnInit, OnDestroy } from "@angular/core";
+import { PostService } from "../posts.service";
+import { AuthService } from "../../auth/auth.service";
+import { Post } from "../post.model";
+import { Subscription } from "rxjs";
+import { Router } from "@angular/router";
+import { PageEvent } from "@angular/material";
 
 @Component({
-  selector: 'app-post-list',
-  templateUrl: './post-list.component.html',
-  styleUrls: ['./post-list.component.css']
+  selector: "app-post-list",
+  templateUrl: "./post-list.component.html",
+  styleUrls: ["./post-list.component.css"]
 })
-
 export class PostListComponent implements OnInit, OnDestroy {
   posts: Post[] = []; // local variable not the one in service.ts
   isLoading = false;
@@ -32,43 +30,50 @@ export class PostListComponent implements OnInit, OnDestroy {
   // [public _service] is exactly same as two lines below :
   // postSrv: PostsService
   // inside constructor: this.postSrv = postSrv
-  constructor(public _service: PostService, public _router: Router, private authService: AuthService) {
-  } // dependency injection
+  constructor(
+    public _service: PostService,
+    public _router: Router,
+    private authService: AuthService
+  ) {} // dependency injection
 
   ngOnInit() {
-    console.log('start post-list.component.ts->ngOnInit()');
+    console.log("start post-list.component.ts->ngOnInit()");
     this.isLoading = true; // let it spin
     this._service.getPosts(this.postsPerPage, this.currentPage); // show 2 post per page and start on page 1 on init
     this.userId = this.authService.getUserId();
     if (!this.userId) {
-      this._router.navigate(['/login']); // if no userId, then redirect to login
+      this._router.navigate(["/login"]); // if no userId, then redirect to login
     }
-    this.postsSub = this._service.getPostUpdateListener()
-      .subscribe( (postData: { posts: Post[], maxPost: Number}) => {
+    this.postsSub = this._service
+      .getPostUpdateListener()
+      .subscribe((postData: { posts: Post[]; maxPost: Number }) => {
         // subscribe to the observerable created in service.ts, forgot what property it has? check posts.service.ts
-        console.log('inside _service.getPostUpdateListener.subscribe()');
+        console.log("inside _service.getPostUpdateListener.subscribe()");
         this.isLoading = false; // stop spin
         this.posts = postData.posts;
         this.totalPosts = postData.maxPost;
-        console.log('this.totalPosts=', this.totalPosts);
+        console.log("this.totalPosts=", this.totalPosts);
       });
     /* vid 27 why click save post doesn't show new post?
     because when post-list first created, you call getPost() which get empty array
     later when you click save post to add new post object into posts array, list doesn't update itself
     */
 
-  /* the following couple of lines take care of re-loading lost logged in status
+    /* the following couple of lines take care of re-loading lost logged in status
   whenever this component reload, retrieve authentication status by calling AuthStatus()
   get authStatus from the Subject in authService
   */
-   this.userIsAuthenticated = this.authService.getAuthStatus();
-   console.log('this.userIsAuthenticated=', this.userIsAuthenticated);
-   this.authStatusSub = this.authService.getAuthStatusListener() // get authStatus
-    .subscribe(isAuthenticated => {
-      console.log('in post-list ngOninit->this.authStatusSub isAuthenticated...');
-      this.userIsAuthenticated = isAuthenticated;
-      this.userId = this.authService.getUserId();
-    });
+    this.userIsAuthenticated = this.authService.getAuthStatus();
+    console.log("this.userIsAuthenticated=", this.userIsAuthenticated);
+    this.authStatusSub = this.authService
+      .getAuthStatusListener() // get authStatus
+      .subscribe(isAuthenticated => {
+        console.log(
+          "in post-list ngOninit->this.authStatusSub isAuthenticated..."
+        );
+        this.userIsAuthenticated = isAuthenticated;
+        this.userId = this.authService.getUserId();
+      });
   }
 
   /* user click pagination logic */
@@ -90,14 +95,14 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   goHome() {
-    this._router.navigate(['']);
+    this._router.navigate([""]);
   }
 
   /* unsubscribe observable when component is destroyed
   otherwise, it will be always listening for changes cause memory leak
   */
   ngOnDestroy() {
-    console.log('calling unsubscribe()...');
+    console.log("calling unsubscribe()...");
     this.postsSub.unsubscribe();
     this.authStatusSub.unsubscribe();
   }
