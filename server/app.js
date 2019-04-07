@@ -28,9 +28,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/images", express.static(path.join("server/images")));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*"); // node tell browser allow code from any origin to access our resource on server
+  res.setHeader("Access-Control-Allow-Origin", "*"); // node tell browser which domain can access resource allow code from any origin to access our resource on server
   res.setHeader(
-    "Access-Control-Allow-Headers", // node tell browser which HTTP header can be used
+    "Access-Control-Allow-Headers", // define what type of headers can be used
+    // are node tell browser which HTTP header can be used
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   res.setHeader(
